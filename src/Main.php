@@ -4,31 +4,50 @@ declare(strict_types=1);
 
 namespace NhanAZ\RevivalTax;
 
-use pocketmine\event\Listener;
-use pocketmine\plugin\PluginBase;
+use InvalidArgumentException;
 use onebone\economyapi\EconomyAPI;
+use pocketmine\event\Listener;
 use pocketmine\event\player\PlayerDeathEvent;
+use pocketmine\plugin\DisablePluginException;
+use pocketmine\plugin\PluginBase;
 
 class Main extends PluginBase implements Listener {
 
-	protected function onEnable(): void {
+	private float $taxPercent;
+	private string $taxMessage;
+
+	protected function onEnable() : void {
 		$this->saveDefaultConfig();
+		try {
+			$this->taxPercent = TaxPolicy::validatePercent($this->getConfig()->get('taxPercent', 10));
+		} catch (InvalidArgumentException $error) {
+			throw new DisablePluginException($error->getMessage(), 0, $error);
+		}
+		$message = $this->getConfig()->get('taxMessage', '§aYou have been deducted §e{taxMoney} §arevival tax! §f(§bTax Percent: §c{taxPercent}%§f)§r');
+		if (!is_string($message)) {
+			throw new DisablePluginException('taxMessage must be a string');
+		}
+		$this->taxMessage = $message;
 		$this->getServer()->getPluginManager()->registerEvents($this, $this);
 	}
 
-	public function onPlayerDeath(PlayerDeathEvent $event): void {
+	public function onPlayerDeath(PlayerDeathEvent $event) : void {
 		$player = $event->getPlayer();
-		$taxPercent = $this->getConfig()->get("taxPercent", 10);
-		$money = EconomyAPI::getInstance()->myMoney($player);
-		$handleTax = round(($money * $taxPercent / 100), 1);
-		if ($money >= 1) {
-			EconomyAPI::getInstance()->reduceMoney($player->getName(), $handleTax);
-			$replacements = [
-				"{taxMoney}" => $handleTax,
-				"{taxPercent}" => $taxPercent,
-			];
-			$subject = $this->getConfig()->get("taxMessage", "§aYou have been deducted §e{taxMoney} §arevival tax! §f(§bTax Percent: §c{taxPercent}%§f)§r");
-			$player->sendMessage(str_replace(array_keys($replacements), $replacements, $subject));
+		$economy = EconomyAPI::getInstance();
+		$balance = $economy->myMoney($player);
+		if ($balance === false) {
+			return;
 		}
+		$tax = TaxPolicy::calculateTax((float) $balance, $this->taxPercent);
+		if ($tax <= 0.0) {
+			return;
+		}
+		if ($economy->reduceMoney($player->getName(), $tax) !== EconomyAPI::RET_SUCCESS) {
+			return;
+		}
+		$player->sendMessage(strtr($this->taxMessage, [
+			'{taxMoney}' => number_format($tax, 2, '.', ''),
+			'{taxPercent}' => (string) $this->taxPercent,
+		]));
 	}
 }

@@ -1,0 +1,4 @@
+/build/
+/.devtools-dependencies/
+/.php-bin/
+/.phpstan/

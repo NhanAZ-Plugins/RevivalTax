@@ -1,11 +1,8 @@
 ---
-# Percentage of tax amount deducted by player after revival
-# The player's deducted amount is calculated using the formula below:
-# (Player's Money) x TaxPercent(%) / 100 = (Player taxes are deducted when they revival)
-taxPercent: 10 #Percent(%)
+# Percentage of the player's EconomyAPI balance charged when they die (0-100).
+taxPercent: 10
 
-# Message sent to players when they death
-# {taxMoney} : Server revival tax percentage
-# {taxPercent} The amount of the player's revival tax to pay
+# Sent only after EconomyAPI confirms the deduction.
+# {taxMoney}: amount charged; {taxPercent}: configured percentage.
 taxMessage: "§aYou have been deducted §e{taxMoney} §arevival tax! §f(§bTax Percent: §c{taxPercent}%§f)§r"
 ...
