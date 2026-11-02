@@ -4,7 +4,7 @@ RevivalTax charges a configurable percentage of an EconomyAPI balance when a pla
 
 ## Requirements
 
-- Axolotl-PM with PocketMine-MP API 5.0.0. Static analysis covers the 5.0.0 and 5.49.1 source revisions. The plugin is not certified against every release in the 5.x line.
+- Axolotl-PM with PocketMine-MP API 5.0.0. Static analysis covers the 5.0.0 and 5.51.1 source revisions. The plugin is not certified against every release in the 5.x line.
 - A PocketMine-MP 5 compatible [EconomyAPI](https://github.com/ACM-PocketMine-MP/EconomyAPI) plugin. The build workflow checks the API against a pinned source revision. EconomyAPI must be installed separately on the server.
 
 ## Configuration
