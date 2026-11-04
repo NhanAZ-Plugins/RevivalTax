@@ -1,6 +1,15 @@
 # RevivalTax
 
-RevivalTax charges a configurable percentage of an EconomyAPI balance when a player dies. The charge occurs on the death event, before the player respawns.
+Charge a configurable EconomyAPI tax when players die on Axolotl-PM
+
+[![CI](https://github.com/NhanAZ-Plugins/RevivalTax/actions/workflows/build.yml/badge.svg)](https://github.com/NhanAZ-Plugins/RevivalTax/actions/workflows/build.yml)
+[![Latest release](https://img.shields.io/github/v/release/NhanAZ-Plugins/RevivalTax)](https://github.com/NhanAZ-Plugins/RevivalTax/releases/latest)
+[![License](https://img.shields.io/github/license/NhanAZ-Plugins/RevivalTax)](https://github.com/NhanAZ-Plugins/RevivalTax/blob/master/LICENSE)
+[![Discord](https://img.shields.io/discord/986553214889517088?label=Discord&logo=discord&logoColor=white&color=5865F2)](https://discord.gg/j2X83ujT6c)
+
+## Overview
+
+This plugin targets the PocketMine-MP and Axolotl-PM API 5 ecosystem and is maintained under [NhanAZ-Plugins](https://github.com/NhanAZ-Plugins).
 
 ## Requirements
 
