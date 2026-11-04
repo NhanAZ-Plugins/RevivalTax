@@ -37,3 +37,8 @@ RevivalTax is distributed under [GPL-3.0](LICENSE).
 ## Contact
 
 Join the [Discord server](https://discord.gg/j2X83ujT6c) for project discussion.
+
+
+## Credits
+
+Authors: NhanAZ.
