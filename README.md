@@ -28,7 +28,7 @@ Back up the server's EconomyAPI data and this plugin's configuration before chan
 
 ## Build and validation
 
-The [build workflow](.github/workflows/build.yml) tests the tax policy, runs PHPStan at maximum level, and uses [DevTools](https://github.com/NhanAZ/DevTools) to generate and validate the plugin PHAR. CI pins the exact source revisions used for reproducible checks. The workflow artifact contains the PHAR and build metadata; it does not bundle EconomyAPI.
+The [build workflow](.github/workflows/build.yml) tests the tax policy, runs PHPStan at maximum level, and uses [DevTools](https://github.com/AxolotlBucketLabs/DevTools) to generate and validate the plugin PHAR. CI pins the exact source revisions used for reproducible checks. The workflow artifact contains the PHAR and build metadata; it does not bundle EconomyAPI.
 
 ## License
 
